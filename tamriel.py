@@ -32,10 +32,10 @@ jour = int(dateob[0])
 
 # Définition du jour de semaine d'une date donnée
 c = calendar.Calendar()
+
 for i in c.itermonthdays2(annee,mois+1):
-    print(i)
-    res = i in i[0] == jour
+	if(i[0] == jour):
+		res = i[1]
+		print(res)
 
-
-
-print("Vous êtes né le", jour, moistam[mois], annee, ". Votre signe est", astrotam[mois] +".")
+print("Vous êtes né le", jourtam[res], jour, moistam[mois], annee, ". Votre signe est", astrotam[mois] +".")
