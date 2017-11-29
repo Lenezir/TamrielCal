@@ -7,11 +7,15 @@ import datetime
 
 mois = ("Primétoile", "Clairciel", "Semailles", "Ondepluie", "Plantaisons", "Mi-l'An", "Hautzénith", "Vifazur", "Âtrefeu", "Soufflegivre", "Sombreciel", "Soirétoile")
 jours = ("Morndas", "Tirdas", "Middas", "Turdas", "Fredas", "Loredas", "Sundas")
-astro = ("Le Rituel", "L'Amant", "Le Seigneur", "Le Mage", "L'Ombre", "Le Destrier", "L'Apprenti", "Le Guerrier", "La Dame", "La Tour", "L'Astronach", "Le Voleur")
+astro = ("le Rituel", "l'Amant", "le Seigneur", "le Mage", "l'Ombre", "le Destrier", "l'Apprenti", "le Guerrier", "la Dame", "la Tour", "l'Astronach", "le Voleur")
 
 date = datetime.datetime.now()
 now = datetime.datetime.today()
 
-
 print("Nous sommes le",jours[now.weekday()], date.day, mois[date.month-1], date.year)
-print("Vous êtes né le", "xxx", mois[], "xxx. Votre signe est", astro[],".")
+
+dob = int(input("Entrez votre jour de naissance : "))
+mob = int(input("Entrez le chiffre correspondant au mois de naissance (ex. 6 pour juin) : "))
+yob = int(input("Entrez votre année de naissance : "))
+
+print("Vous êtes né le", dob, mois[mob-1], yob,". Votre signe est", astro[mob-1],".")
