@@ -18,7 +18,7 @@ date = datetime.datetime.now()
 now = datetime.datetime.today()
 
 # Affichage de la date du jour
-print("Nous sommes le", jourtam[now.weekday()], date.day, moistam[date.month-1], date.year, "et nous somme en plein", saisontam[date.month-1], ".")
+print("Nous sommes le", jourtam[now.weekday()], date.day, moistam[date.month-1], date.year, "et nous sommes en plein", saisontam[date.month-1], ".")
 
 ########################################################################################################################
 
