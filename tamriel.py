@@ -1,5 +1,5 @@
 """
-TamrielCal v0.1
+TamrielCal v0.2
 Calendrier de correspondance entre le calendrier grégorien et le celui de Tamriel.
 """
 
@@ -7,11 +7,22 @@ Calendrier de correspondance entre le calendrier grégorien et le celui de Tamri
 import datetime
 import calendar
 
-# Jours, mois et signes astrologiques de Tamriel
-moistam = (("Primétoile",3), ("Clairciel",0), ("Semailles",0), ("Ondepluie",0), ("Plantaisons",1), ("Mi-l'An",1), ("Hautzénith",1), ("Vifazur",2), ("Âtrefeu",2), ("Soufflegivre",2), ("Sombreciel",3), ("Soirétoile",3))
-jourtam = ("Morndas", "Tirdas", "Middas", "Turdas", "Fredas", "Loredas", "Sundas")
-astrotam = ("le Rituel", "l'Amant", "le Seigneur", "le Mage", "l'Ombre", "le Destrier", "l'Apprenti", "le Guerrier", "la Dame", "la Tour", "l'Astronach", "le Voleur")
-saisontam = ("printemps", "été", "automne", "hiver")
+calendrier_tamriel = {
+	1: {"mois": "Primétoile", "signe": "le Rituel", "saison": "hiver"},
+	2: {"mois": "Clairciel", "signe": "l'Amant", "saison": "printemps"},
+	3: {"mois": "Semailles", "signe": "le Seigneur", "saison": "printemps"},
+	4: {"mois": "Ondepluie", "signe": "le Mage","saison": "printemps"},
+	5: {"mois": "Plantaisons", "signe": "l'Ombre", "saison": "été"},
+	6: {"mois": "Mi-l'an", "signe": "le Destrier", "saison": "été"},
+	7: {"mois": "Hautzénith", "signe": "l'Apprenti", "saison": "été"},
+	8: {"mois": "Vifazur", "signe": "le Guerrier", "saison": "automne"},
+	9: {"mois": "Âtrefeu", "signe": "la Dame", "saison": "automne"},
+	10: {"mois": "Soufflegivre", "signe": "la Tour", "saison": "automne"},
+	11: {"mois": "Sombreciel", "signe": "l'Astronach", "saison": "hiver"},
+	12: {"mois": "Soirétoile", "signe": "le Voleur", "saison": "hiver"}
+}
+
+jour_tamriel = ("Morndas", "Tirdas", "Middas", "Turdas", "Fredas", "Loredas", "Sundas")
 
 # Récupération de la date du moment
 date = datetime.datetime.now()
@@ -24,13 +35,13 @@ else:
 	auj = date.day
 
 # Boucle pour le choix de l'article
-if(saisontam[moistam[date.month-1][1]] == "printemps"):
+if(calendrier_tamriel[date.month]["saison"] == "printemps"):
 	article = "au"
 else:
 	article = "en"
 
 # Affichage de la date du jour
-print("Nous sommes le ", jourtam[now.weekday()]," ", auj," ", moistam[date.month-1][0]," ", date.year, ", nous sommes ", article," ", saisontam[moistam[date.month-1][1]], " et le signe astrologique du mois est ", astrotam[date.month-1], ".", sep='')
+print("Nous sommes le ", jour_tamriel[now.weekday()], " ", auj, " ", calendrier_tamriel[date.month]["mois"], " ", date.year, ", nous sommes ", article, " ", calendrier_tamriel[date.month]["saison"], " et le signe astrologique du mois est ", calendrier_tamriel[date.month]["signe"], ".", sep='')
 
 ########################################################################################################################
 
@@ -40,11 +51,11 @@ entree = input("Entrez votre date de naissance (au format jj/mm/aaaa) : ")
 # Découpage de la date entrée en jour/mois/année
 dateob = entree.split('/')
 annee = int(dateob[2])
-mois = int(dateob[1])-1
+mois = int(dateob[1])
 jour = int(dateob[0])
 
 # Boucle pour ajouter 'er' au premier jour du mois
-if(jour == 1):
+if jour == 1:
 	jour_nd = "1er"
 else:
 	jour_nd = jour
@@ -53,14 +64,14 @@ else:
 c = calendar.Calendar()
 
 # Boucle permettant de trouver le jour de la semaine 
-for i in c.itermonthdays2(annee,mois+1):
+for i in c.itermonthdays2(annee,mois):
 	if(i[0] == jour):
 		res = i[1]
 
 # Article à mettre devant la saison (au à la place de en pour le printemps)
-if(saisontam[moistam[mois][1]] == "printemps"):
+if calendrier_tamriel[mois]["saison"] == "printemps":
 	article = "au"
 else:
 	article = "en"
 
-print("Vous êtes né le ", jourtam[res]," ", jour_nd," ", moistam[mois][0]," ", annee," ", article," ", saisontam[moistam[mois][1]], ". Votre signe est ", astrotam[mois], ".", sep='')
+print("Vous êtes né le ", jour_tamriel[res]," ", jour_nd," ", calendrier_tamriel[mois]["mois"]," ", annee," ", article," ", calendrier_tamriel[mois]["saison"], ". Votre signe est ", calendrier_tamriel[mois]["signe"], ".", sep='')
